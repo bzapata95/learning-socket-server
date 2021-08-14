@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Websocket</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+
+<body class="container">
+  <h1 class="mt-5">Mini chat</h1>
+  <hr />
+
+  <form id="myForm">
+    <div class="row">
+      <div class="col-8">
+        <input type="text" id="message" placeholder="Message" class="form-control">
+      </div>
+      <div class="col-4">
+        <button type="submit" class="btn btn-primary">
+          Send
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col">
+      <ul id="myMessages" class="mt-2">
+      </ul>
+    </div>
+  </div>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"
+    integrity="sha512-PU5S6BA03fRv1Q5fpwXjg5nlRrgdoguZ74urFInkbABMCENyx5oP3hrDzYMMPh3qdLdknIvrGj3yqZ4JuU7Nag=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    const socket = io('http://localhost:3333');
+
+    const myForm = document.querySelector('#myForm');
+    const myMessages = document.querySelector('#myMessages');
+    const message = document.querySelector('#message');
+
+    myForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const newMessage = message.value;
+
+      socket.emit('new-message', {text: newMessage});
+    })
+
+    
+    socket.on('send-message-from-server', (data) => {
+      myMessages.innerHTML += `<li>${data.text}</li>`   
+    })
+
+    
+  </script>
+</body>
+
+</html>
