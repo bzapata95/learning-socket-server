@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "start": "ts-node-dev src/server.ts"
+    "start": "ts-node src/server.ts"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
