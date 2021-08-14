@@ -41,23 +41,27 @@
     integrity="sha512-PU5S6BA03fRv1Q5fpwXjg5nlRrgdoguZ74urFInkbABMCENyx5oP3hrDzYMMPh3qdLdknIvrGj3yqZ4JuU7Nag=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
-    const socket = io('https://learning-socket-server.herokuapp.com/');
+    const socket = io('http://localhost:3333');
 
     const myForm = document.querySelector('#myForm');
     const myMessages = document.querySelector('#myMessages');
     const message = document.querySelector('#message');
 
-    myForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+    // myForm.addEventListener('submit', (e) => {
+    //   e.preventDefault();
 
-      const newMessage = message.value;
+    //   const newMessage = message.value;
 
-      socket.emit('new-message', {text: newMessage});
-    })
+    //   socket.emit('new-message', {text: newMessage});
+    // })
 
     
-    socket.on('send-message-from-server', (data) => {
-      myMessages.innerHTML += `<li>${data.text}</li>`   
+    // socket.on('send-message-from-server', (data) => {
+    //   myMessages.innerHTML += `<li>${data.text}</li>`   
+    // })
+
+    socket.on('current-bands', (data) => {
+      console.log(data);
     })
 
     
