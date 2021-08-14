@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import cors from "cors";
 import path from "path";
 import { createServer, Server as ServerHttp } from "http";
 
@@ -23,6 +24,7 @@ class Server {
   }
 
   middlewares() {
+    this.app.use(cors());
     // Deploy directory public
     this.app.use(express.static(path.join(__dirname, "..", "..", "public")));
   }
